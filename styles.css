@@ -88,10 +88,11 @@ button:hover {
 }
 
 .profile-image {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     margin-bottom: 10px;
+    object-fit: cover;
 }
 
 .description {
@@ -108,22 +109,24 @@ button:hover {
 }
 
 .skills span {
-    font-size: 0.8em;
+    font-size: 0.9em;
     background-color: #e1e5ee;
     color: #333;
     padding: 5px 10px;
     border-radius: 5px;
+    margin: 2px;
 }
+
 
 .download-btn {
     display: inline-block;
-    background-color: #5b9df9;
+    background-color: #007BFF;
     color: #fff;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 1em;
     margin-top: 10px;
     transition: background-color 0.3s ease;
 }

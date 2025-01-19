@@ -36,8 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $skillsHtml .= "<span>" . trim($skill) . "</span>";
     }
 
-    var_dump($education);
-
     $htmlContent = "
     <!DOCTYPE html>
     <html lang='en'>

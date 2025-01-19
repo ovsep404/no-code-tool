@@ -54,7 +54,6 @@ function updatePreview() {
     }
 }
 
-
 function savePortfolio() {
     const name = document.getElementById('name').value;
     const title = document.getElementById('title').value;

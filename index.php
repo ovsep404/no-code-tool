@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +14,7 @@
     <title>Portfolio Generator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
+<body>
 <header>
     <div class="header-container">
         <h1>Portfolio Generator</h1>
@@ -14,52 +22,56 @@
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="list.php">Generated Portfolios</a></li>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="register.php">Register</a></li>
+                    <li><a href="login.php">Login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </div>
 </header>
-<body>
 <div class="container">
     <h1>Portfolio Generator</h1>
     <div class="content">
         <div class="form-container">
-            <form id="portfolioForm" enctype="multipart/form-data">
+        <form id="portfolioForm" enctype="multipart/form-data" method="POST" action="save.php">
+    <label for="image">Profile Image:</label>
+    <input type="file" id="image" name="image" oninput="updatePreview()">
 
-                <label for="image">Profile Image:</label>
-                <input type="file" id="image" name="image" oninput="updatePreview()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="Cristopher Abbott" oninput="updatePreview()">
 
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" value="Cristopher Abbott" oninput="updatePreview()">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" value="Full Stack Developer - USA" oninput="updatePreview()">
 
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" value="Full Stack Developer - USA" oninput="updatePreview()">
+    <label for="bio">Bio:</label>
+    <textarea id="bio" name="bio" oninput="updatePreview()">Full-stack developer with 8+ years of experience in building web apps. Skilled in React, Node.js, Python, and SQL.</textarea>
 
-                <label for="bio">Bio:</label>
-                <textarea id="bio" name="bio" oninput="updatePreview()">Full-stack developer with 8+ years of experience in building web apps. Skilled in React, Node.js, Python, and SQL.</textarea>
+    <label for="about">About Me:</label>
+    <textarea id="about" name="about" oninput="updatePreview()">I am passionate about using technology to solve real-world problems. I am always looking for new ways to improve the user experience and make software more accessible to everyone. I am also a strong advocate for open-source software and am always willing to contribute to the community.</textarea>
 
-                <label for="about">About Me:</label>
-                <textarea id="about" name="about" oninput="updatePreview()">I am passionate about using technology to solve real-world problems. I am always looking for new ways to improve the user experience and make software more accessible to everyone. I am also a strong advocate for open-source software and am always willing to contribute to the community.</textarea>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" value="Location" oninput="updatePreview()">
 
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" value="Location" oninput="updatePreview()">
+    <label for="experience">Experience:</label>
+    <textarea id="experience" name="experience" oninput="updatePreview()">Google • Mountain View, CA • Jul 2020 - Present: Developed and maintained web applications using React, Node.js, and Python. Worked with a team of engineers to deliver high-quality software on time and within budget.</textarea>
 
-                <label for="experience">Experience:</label>
-                <textarea id="experience" name="experience" oninput="updatePreview()">Google • Mountain View, CA • Jul 2020 - Present: Developed and maintained web applications using React, Node.js, and Python. Worked with a team of engineers to deliver high-quality software on time and within budget.</textarea>
+    <label for="education">Education:</label>
+    <textarea id="education" name="education" oninput="updatePreview()">Stanford University • Stanford, CA • 2018 - 2020: Developed a machine learning algorithm to predict customer churn. Built a web application to help students find roommates.</textarea>
 
-                <label for="education">Education:</label>
-                <textarea id="education" name="education" oninput="updatePreview()">Stanford University • Stanford, CA • 2018 - 2020: Developed a machine learning algorithm to predict customer churn. Built a web application to help students find roommates.</textarea>
+    <label for="skills">Skills:</label>
+    <textarea id="skills" name="skills" oninput="updatePreview()">JavaScript, React, Node.js, ExpressJS, Python, SQL, Git, Agile, CI/CD</textarea>
 
-                <label for="skills">Skills:</label>
-                <textarea id="skills" name="skills" oninput="updatePreview()">JavaScript, React, Node.js, ExpressJS, Python, SQL, Git, Agile, CI/CD</textarea>
+    <label for="availability">Availability:</label>
+    <input type="text" id="availability" name="availability" value="Availability" oninput="updatePreview()">
 
-                <label for="availability">Availability:</label>
-                <input type="text" id="availability" name="availability" value="Availability" oninput="updatePreview()">
+    <label for="relocation">Relocation:</label>
+    <input type="text" id="relocation" name="relocation" value="Relocation" oninput="updatePreview()">
 
-                <label for="relocation">Relocation:</label>
-                <input type="text" id="relocation" name="relocation" value="Relocation" oninput="updatePreview()">
-
-                <button type="button" onclick="savePortfolio()">Save Portfolio</button>
-            </form>
+    <button type="submit">Save Portfolio</button>
+</form>
         </div>
 
         <div class="preview-container">
